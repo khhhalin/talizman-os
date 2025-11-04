@@ -1,0 +1,38 @@
+@startuml lobby
+title Lobby System
+
+!include enums.wsd
+hide enum
+
+class GameState <<Autoload>> {
+  + host_game(name: String)
+  + join_game(ip: String, name: String)
+  + begin_game()
+  + end_game()
+  --signals--
+  + player_list_changed()
+  + connection_failed()
+  + connection_succeeded()
+  + game_ended()
+  + game_error(what: String)
+}
+
+class LobbyScene <<Control>> {
+  + _on_host_pressed()
+  + _on_join_pressed()
+  + _on_start_pressed()
+  + refresh_lobby()
+  - _on_connection_success()
+  - _on_connection_failed()
+}
+
+class PlayerListUI <<Control>>
+class ConnectUI <<Control>>
+
+LobbyScene --> PlayerListUI : contains
+LobbyScene --> ConnectUI : contains
+
+GameState --> LobbyScene : emits signals to
+LobbyScene --> GameState : invokes host/join/start
+
+@enduml

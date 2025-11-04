@@ -1,0 +1,42 @@
+@startuml ui
+title UI System
+
+!include enums.wsd
+hide enum
+
+class UIManager <<CanvasLayer>> {
+  + show_player_stats(player: Player)
+  + show_turn_indicator(player: Player)
+  + show_inventory(target: Inventory)
+  + show_combat_interface(attacker: Player, defender: EnemyCard)
+  + show_dice_roll(result: int)
+}
+
+class PlayerStatsUI <<Control>>
+class TurnIndicatorUI <<Control>>
+class InventoryUI <<Control>> {
+  + refresh_display(inventory: Inventory)
+}
+class CombatUI <<Control>>
+class DiceUI <<Control>>
+
+class Player <<CharacterBody2D>>
+class Inventory <<Node>>
+class EnemyCard
+class TurnManager <<Autoload>>
+class CombatManager <<Node>>
+
+UIManager --> PlayerStatsUI : manages
+UIManager --> TurnIndicatorUI : manages
+UIManager --> InventoryUI : manages
+UIManager --> CombatUI : manages
+UIManager --> DiceUI : manages
+
+UIManager --> Player : reads stats
+UIManager --> Inventory : displays items
+UIManager --> EnemyCard : shows combat target
+
+TurnManager --> UIManager : turn signals
+CombatManager --> UIManager : combat events
+
+@enduml

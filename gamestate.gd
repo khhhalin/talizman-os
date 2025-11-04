@@ -15,7 +15,7 @@ var player_name = "The Warrior"
 
 # Names for remote players in id:name format.
 var players = {}
-var players_ready = []
+
 
 # Signals to let lobby GUI know what's going on.
 signal player_list_changed()

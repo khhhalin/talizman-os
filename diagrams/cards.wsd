@@ -1,0 +1,51 @@
+@startuml cards
+title Cards & Decks
+
+!include enums.wsd
+hide enum
+
+abstract class StandardCard <<Resource>> {
+  - String name
+  - String description
+  - Texture2D artwork
+  - CardType type
+  - bool usable_in_combat
+  - Dictionary data
+  - NodePath inventory_path
+  + play(player: Player)
+  + can_be_played(player: Player): bool
+}
+
+class AdventureCard
+class SpellCard
+class EnemyCard
+class ItemCard
+class FollowerCard
+
+AdventureCard --|> StandardCard
+SpellCard --|> StandardCard
+EnemyCard --|> StandardCard
+ItemCard --|> StandardCard
+FollowerCard --|> StandardCard
+
+class CardManager <<Autoload>> {
+  - Dictionary deck_data
+  - Array<StandardCard> adventure_deck
+  - Array<StandardCard> spell_deck
+  - Array<StandardCard> purchase_deck
+  + load_decks()
+  + draw_adventure_card(): StandardCard
+  + draw_spell_card(): StandardCard
+  + shuffle_deck(deck_type: String)
+}
+
+class Inventory <<Node>>
+interface IHasInventory {
+  + get_inventory(): Inventory
+}
+
+StandardCard ..|> IHasInventory
+StandardCard --> Inventory : references via NodePath
+CardManager --> StandardCard : manages
+
+@enduml

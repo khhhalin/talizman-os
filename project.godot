@@ -22,6 +22,10 @@ config/icon="res://icon.webp"
 [autoload]
 
 gamestate="*res://gamestate.gd"
+turn_manager="*res://src/autoloads/turn_manager.gd"
+card_manager="*res://src/autoloads/card_manager.gd"
+network_manager="*res://src/networking/network_manager.gd"
+lobby_manager="*res://src/autoloads/lobby_manager.gd"
 
 [display]
 

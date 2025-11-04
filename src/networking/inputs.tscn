@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/networking/inputs.gd" id="1"]
+
+[sub_resource type="SceneReplicationConfig" id="1"]
+properties/0/path = NodePath(".:motion")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:bombing")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
+[node name="Inputs" type="Node"]
+script = ExtResource("1")
+
+[node name="InputsSync" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("1")
