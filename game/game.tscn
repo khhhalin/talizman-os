@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://lkhfcr03sx18"]
+
+[ext_resource type="PackedScene" uid="uid://jhdlqsokif5o" path="res://game/lobby_manager/lobby_manager.tscn" id="1_vasa2"]
+[ext_resource type="PackedScene" uid="uid://bdbv386ihwmpa" path="res://game/main_menu/main_menu.tscn" id="3_h7iqs"]
+[ext_resource type="PackedScene" uid="uid://cc76ulo36qjo8" path="res://game/options_menu/options_menu.tscn" id="4_4fuuu"]
+[ext_resource type="Script" uid="uid://dj07u6o27jdc3" path="res://game/main_menu/main_menu.gd" id="4_dxrkv"]
+[ext_resource type="Script" uid="uid://s63bwgnreiui" path="res://game/options_menu/options_menu.gd" id="5_dxrkv"]
+[ext_resource type="PackedScene" uid="uid://o6xk6rfxxx00" path="res://game/board/board.tscn" id="6_dakft"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MainMenu" parent="." instance=ExtResource("3_h7iqs")]
+layout_mode = 1
+script = ExtResource("4_dxrkv")
+
+[node name="LobbyManager" parent="." instance=ExtResource("1_vasa2")]
+visible = false
+layout_mode = 1
+
+[node name="OptionsMenu" parent="." instance=ExtResource("4_4fuuu")]
+visible = false
+layout_mode = 1
+script = ExtResource("5_dxrkv")
+
+[node name="Board" parent="." instance=ExtResource("6_dakft")]
+position = Vector2(-356, -2)
+map_path = null
+map_color_map_path = null
+auto_build_on_ready = null

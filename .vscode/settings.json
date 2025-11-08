@@ -1,3 +1,7 @@
 {
-    "godotTools.editorPath.godot4": "/home/kalin/Godot_v4.5.1-stable_linux.x86_64"
+    "godotTools.editorPath.godot4": "d:\\Godot_v4.5.1-stable_win64.exe",
+    "editor.fontFamily": "lexend",
+    "files.exclude": {
+        "**/.import": true
+    }
 }

@@ -1,3 +1,6 @@
-res://score.gd
-res://lobby.gd
-res://gamestate.gd
+res://game/board/board.gd
+res://game/board/BoardDataLoader.gd
+res://game/game.tscn
+res://game/autoloads/gamestate.gd
+res://game/autoloads/SceneManager.gd
+res://game/board/tile.gd

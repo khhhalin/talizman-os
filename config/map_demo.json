@@ -1,0 +1,10 @@
+{
+    "Outer": {
+      "two way": [ ["forest","jungle","ruins","rocks"] ],
+      "one way": [ { "rocks:" : "cittadel" }, { "cittadel": "forest" } ]
+    },
+    "Middle": {
+      "two way": [["desert","volcano","cittadel"]],
+      "one way": [ { "volcano": "ruins" }, { "ruins": "jungle" } ]
+    }
+  }
