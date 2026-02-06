@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="TileColorMap" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://game/board/resources/TileColorMap.gd" id="1_abc123"]
+
+[resource]
+script = ExtResource("1_abc123")
+mappings = {
+"boss": Color(1, 0, 0, 1),
+"citadel": Color(0.4, 0.8, 0.4, 1),
+"desert": Color(0.4, 0.698039, 1, 1),
+"forest": Color(1, 0.843137, 0, 1),
+"jungle": Color(0.8, 0.8, 0.8, 1),
+"rest": Color(0.666667, 0.666667, 0.666667, 1),
+"rocks": Color(0.662745, 0.662745, 0.662745, 1),
+"ruins": Color(0.8, 0.4, 1, 1),
+"shop": Color(0, 1, 1, 1),
+"special": Color(1, 0, 1, 1),
+"start": Color(0, 1, 0, 1),
+"treasure": Color(1, 1, 0, 1),
+"volcano": Color(1, 0.360784, 0.360784, 1)
+}

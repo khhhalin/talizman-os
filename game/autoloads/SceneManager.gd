@@ -14,6 +14,8 @@ const SCENES := {
 	"OptionsMenu": "res://game/options_menu/options_menu.tscn",
 	"LobbyManager": "res://game/lobby_manager/lobby_manager.tscn",
 	"InputRemapMenu": "res://game/options_menu/InputRemapMenu/InputRemapMenu.tscn",
+	"CharacterSelect": "res://game/character_select/character_select.tscn",
+	"Gameplay": "res://game/gameplay/gameplay.tscn",
 }
 
 # Cache for loaded PackedScene resources so we don't reload them repeatedly
@@ -90,6 +92,14 @@ func go_to_lobby() -> int:
 
 func go_to_input_remap() -> int:
 	return await change_scene("InputRemapMenu")
+
+
+func go_to_character_select() -> int:
+	return await change_scene("CharacterSelect")
+
+
+func go_to_gameplay() -> int:
+	return await change_scene("Gameplay")
 
 
 func reload_current_scene() -> int:

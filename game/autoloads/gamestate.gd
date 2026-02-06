@@ -74,15 +74,15 @@ func unregister_player(id):
 
 @rpc("call_local")
 func load_world():
-	# Change scene.
-	var world = load("res://game/board/board.tscn").instantiate()
-	get_tree().get_root().add_child(world)
-	get_tree().get_root().get_node("Lobby").hide()
-
-	# Set up score.
-	world.get_node("Score").add_player(multiplayer.get_unique_id(), player_name)
-	for pn in players:
-		world.get_node("Score").add_player(pn, players[pn])
+	# Use SceneManager to cleanly transition to gameplay scene
+	var game_scene = "res://game/gameplay/gameplay.tscn"
+	
+	# Change to the game scene
+	var err = get_tree().change_scene_to_file(game_scene)
+	if err != OK:
+		push_error("Failed to load game scene: " + str(err))
+		return
+	
 	get_tree().set_pause(false) # Unpause and unleash the game!
 
 
@@ -110,33 +110,15 @@ func get_player_name():
 
 func begin_game():
 	assert(multiplayer.is_server())
-	load_world.rpc()
-
-	var world = get_tree().get_root().get_node("World")
-	var player_scene = load("res://player.tscn")
-
-	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing.
-	var spawn_points = {}
-	spawn_points[1] = 0 # Server in spawn point 0.
-	var spawn_point_idx = 1
-	for p in players:
-		spawn_points[p] = spawn_point_idx
-		spawn_point_idx += 1
-
-	for p_id in spawn_points:
-		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
-		var player = player_scene.instantiate()
-		player.synced_position = spawn_pos
-		player.name = str(p_id)
-		player.set_player_name(player_name if p_id == multiplayer.get_unique_id() else players[p_id])
-		world.get_node("Players").add_child(player)
+	
+	# Go to character selection first
+	SceneManager.go_to_character_select()
 
 
 func end_game():
-	if has_node("/root/World"): # Game is in progress.
-		# End it
-		get_node("/root/World").queue_free()
-
+	# Return to lobby using SceneManager
+	SceneManager.go_to_lobby()
+	
 	game_ended.emit()
 	players.clear()
 

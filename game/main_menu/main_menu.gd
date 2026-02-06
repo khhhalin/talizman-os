@@ -17,6 +17,7 @@ func _process(_delta: float) -> void:
 
 # Updated to use SceneManager for scene transitions
 func _on_play_pressed():
+	# Go to lobby for host/join multiplayer options
 	SceneManager.go_to_lobby()
 
 func _on_options_pressed():

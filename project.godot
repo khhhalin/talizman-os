@@ -8,17 +8,22 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Talizman-os"
-config/description="teraz sie uda tego talizmana skonczyc"
-config/tags=PackedStringArray("2d", "demo", "network", "official")
-run/main_scene="uid://lkhfcr03sx18"
-config/features=PackedStringArray("4.5")
+config/description="Digital edition of Talisman board game"
+config/tags=PackedStringArray("2d", "demo", "board_game", "talisman")
+run/main_scene="res://game/main_menu/main_menu.tscn"
+config/features=PackedStringArray("4.6")
 config/icon="res://icon.webp"
 
 [autoload]
 
+BoardDataLoader="*res://game/board/BoardDataLoader.gd"
 KeyPersistence="*res://game/autoloads/KeyPersistence.gd"
 Gamestate="*res://game/autoloads/gamestate.gd"
 SceneManager="*res://game/autoloads/SceneManager.gd"

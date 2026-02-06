@@ -1,10 +1,12 @@
 @tool
 extends Node2D
 
+const ColorUtils = preload("res://game/board/ColorUtils.gd")
+
 @export var rows: int = 8
 @export var cols: int = 8
-@export var spacing: Vector2 = Vector2(0, 0) # extra spacing between tiles
-@export var tile_size: Vector2 = Vector2(32, 32)
+@export var spacing: Vector2 = Vector2(10, 10) # extra spacing between tiles for visibility
+@export var tile_size: Vector2 = Vector2(80, 80) # Larger tiles for Caesar!
 
 # You can supply either a PackedScene or rely on the global Tile class (class_name Tile)
 @export var tile_scene: PackedScene = preload("res://game/board/tile.tscn")
@@ -54,13 +56,13 @@ func _ready() -> void:
 
 	if auto_build_on_ready and map_path != "":
 		var ok = false
-		if Engine.has_singleton("BoardDataLoader"):
-			# use autoload loader instance
-			var loader = get_node("/root/BoardDataLoader")
-			if loader:
-				ok = loader.build_board_from_map(map_path, self, map_color_map_path)
+		# Try to get BoardDataLoader if it exists, but don't require it
+		var loader = get_node_or_null("/root/BoardDataLoader")
+		if loader and loader.has_method("build_board_from_map"):
+			ok = loader.build_board_from_map(map_path, self, map_color_map_path)
 		else:
-			push_warning("board.gd: BoardDataLoader autoload not found; falling back to local builder")
+			push_warning("board.gd: BoardDataLoader not available; falling back to local builder")
+		
 		if not ok:
 			# fallback to local grid builder
 			_build_grid()
@@ -72,13 +74,12 @@ func build_from_map() -> bool:
 	if map_path == "":
 		push_warning("board.gd: map_path not set")
 		return false
-	if not Engine.has_singleton("BoardDataLoader"):
-		push_warning("board.gd: BoardDataLoader autoload not found")
+	
+	var loader = get_node_or_null("/root/BoardDataLoader")
+	if not loader or not loader.has_method("build_board_from_map"):
+		push_warning("board.gd: BoardDataLoader not available")
 		return false
-	var loader = get_node("/root/BoardDataLoader")
-	if not loader:
-		push_warning("board.gd: failed to find /root/BoardDataLoader")
-		return false
+	
 	return loader.build_board_from_map(map_path, self, map_color_map_path)
 
 func _process(_delta: float) -> void:
@@ -98,8 +99,8 @@ func _draw() -> void:
 		# try property lookup
 		pass
 	var viz = false
-	if has_method("get"):
-		viz = bool(get("_editor_visualize_edges")) if has("_editor_visualize_edges") or get("_editor_visualize_edges") != null else false
+	if has_meta("_editor_visualize_edges"):
+		viz = bool(get_meta("_editor_visualize_edges"))
 	if not viz:
 		return
 
@@ -261,21 +262,7 @@ func _donut_coords(r: int, c: int) -> Array:
 	return coords
 
 func hex_to_color(hex: String) -> Color:
-	var s := hex.strip_edges()
-	if s.begins_with("#"):
-		s = s.substr(1, s.length() - 1)
-	if s.length() == 6:
-		var r = int("0x" + s.substr(0, 2)) / 255.0
-		var g = int("0x" + s.substr(2, 2)) / 255.0
-		var b = int("0x" + s.substr(4, 2)) / 255.0
-		return Color(r, g, b, 1.0)
-	elif s.length() == 8:
-		var r = int("0x" + s.substr(0, 2)) / 255.0
-		var g = int("0x" + s.substr(2, 2)) / 255.0
-		var b = int("0x" + s.substr(4, 2)) / 255.0
-		var a = int("0x" + s.substr(6, 2)) / 255.0
-		return Color(r, g, b, a)
-	return Color(1, 1, 1, 1)
+	return ColorUtils.hex_to_color(hex)
 
 func rebuild_grid() -> void:
 	_build_grid()

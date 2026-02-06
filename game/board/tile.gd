@@ -17,12 +17,13 @@ The tile draws itself in _draw() and updates live in the editor thanks to @tool.
 enum Shape {RECTANGLE, CIRCLE}
 
 @export var color: Color = Color(1, 1, 1, 1)
-@export var size: Vector2 = Vector2(32, 32)
+@export var size: Vector2 = Vector2(80, 80)
 @export var shape: int = Shape.RECTANGLE
 @export var filled: bool = true
 @export var tile_name: String = ""
 @export var spot_scale: float = 0.0 # 0.0 = no spot, 0.2 = small, 0.5 = medium
 @export var spot_color: Color = Color(0, 0, 0, 1)
+@export var show_name: bool = true # Show tile name on tile
 
 # Grid metadata (set by Board)
 var grid_index: int = -1
@@ -50,6 +51,10 @@ func apply_properties(props: Dictionary) -> void:
 		return
 	if props.has("tile_name"):
 		tile_name = str(props.tile_name)
+		# Update label if it exists
+		if has_node("Label"):
+			var label = get_node("Label")
+			label.text = tile_name.capitalize()
 	if props.has("color") and props.color is Color:
 		color = props.color
 	if props.has("spot_scale"):

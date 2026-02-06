@@ -1,6 +1,13 @@
 res://game/board/board.gd
-res://game/board/BoardDataLoader.gd
-res://game/game.tscn
+res://game/board/resources/TileColorMap.gd
 res://game/autoloads/gamestate.gd
 res://game/autoloads/SceneManager.gd
+res://game/main_menu/main_menu.gd
+res://game/lobby_manager/lobby_manager.gd
+res://game/lobby_manager/lobby_manager.tscn
+res://game/gameplay/gameplay.gd
 res://game/board/tile.gd
+res://game/board/tile.tscn
+res://game/player_token/player_token.gd
+res://game/player_token/player_token.tscn
+res://game/board/BoardDataLoader.gd

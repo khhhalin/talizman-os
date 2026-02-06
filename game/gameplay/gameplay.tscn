@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4qfk3bxf0y3x"]
+
+[ext_resource type="Script" path="res://game/gameplay/gameplay.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://o6xk6rfxxx00" path="res://game/board/board.tscn" id="2_board"]
+[ext_resource type="PackedScene" uid="uid://bvx8m5n2qk8yp" path="res://game/dice/DiceRoller.tscn" id="3_dice"]
+
+[node name="Gameplay" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Board" parent="." instance=ExtResource("2_board")]
+map_path = "res://config/map_demo.json"
+auto_build_on_ready = true
+
+[node name="Tokens" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.8, 0.8)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="BackButton" type="Button" parent="UI"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 110.0
+offset_bottom = 50.0
+text = "Back to Menu"
+
+[node name="DiceRoller" parent="UI" instance=ExtResource("3_dice")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -170.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0

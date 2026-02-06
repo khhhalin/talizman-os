@@ -8,7 +8,9 @@ validation, and board instantiation. Prefer to keep parsing/validation helpers
 in separate modules (planned refactor) and keep this autoload as a thin facade.
 """
 
-class_name BoardDataLoader
+# Note: No class_name because this is an autoload singleton
+
+const ColorUtils = preload("res://game/board/ColorUtils.gd")
 
 @export var default_tile_scene: PackedScene = preload("res://game/board/tile.tscn")
 @export var default_color_map_file: String = "res://config/tile_colors.json"
@@ -35,10 +37,13 @@ func _parse_json_file(path: String) -> Dictionary:
 	var text := f.get_as_text()
 	f.close()
 	var parsed = JSON.parse_string(text)
-	if parsed.error != OK:
-		push_error("BoardDataLoader: JSON parse error %s in %s" % [str(parsed.error), path])
+	if parsed == null:
+		push_error("BoardDataLoader: JSON parse error in %s" % path)
 		return {}
-	return parsed.result
+	if typeof(parsed) != TYPE_DICTIONARY:
+		push_error("BoardDataLoader: JSON root is not a Dictionary in %s" % path)
+		return {}
+	return parsed
 
 func load_color_map(path: String) -> Dictionary:
 	var dict = _parse_json_file(path)
@@ -172,12 +177,10 @@ func build_board_from_map(map_path: String, board_node: Node, color_map_path: St
 					if k in two_keys or k in one_keys:
 						looks_like_regions = true
 						break
-                
-            
+			
 			if looks_like_regions:
 				break
-            
-        
+		
 		if looks_like_regions:
 			map = {"regions": map}
 
@@ -189,20 +192,19 @@ func build_board_from_map(map_path: String, board_node: Node, color_map_path: St
 			var f = str(e.get("from", "")).strip_edges()
 			if f.length() > 0 and f.substr(f.length() - 1, 1) == ":":
 				f = f.substr(0, f.length() - 1)
-            
+			
 			inferred_ids[f] = true
 			var t = str(e.get("to", "")).strip_edges()
 			if t.length() > 0 and t.substr(t.length() - 1, 1) == ":":
 				t = t.substr(0, t.length() - 1)
-            
+			
 			inferred_ids[t] = true
-        
+		
 		var nodes_arr: Array = []
 		for id in inferred_ids.keys():
 			if id != "":
 				nodes_arr.append({"id": id})
-            
-        
+		
 		map["nodes"] = nodes_arr
 	# expand regions into edges if present so validation and building see a unified edge list
 	if map.has("regions"):
@@ -282,18 +284,4 @@ func _apply_shape_to_map(shape: Variant, map: Dictionary) -> void:
 
 
 func _hex_to_color(h: String) -> Color:
-	var s := h.strip_edges()
-	if s.begins_with("#"):
-		s = s.substr(1, s.length() - 1)
-	if s.length() == 6:
-		var r = int("0x" + s.substr(0, 2)) / 255.0
-		var g = int("0x" + s.substr(2, 2)) / 255.0
-		var b = int("0x" + s.substr(4, 2)) / 255.0
-		return Color(r, g, b, 1.0)
-	elif s.length() == 8:
-		var r = int("0x" + s.substr(0, 2)) / 255.0
-		var g = int("0x" + s.substr(2, 2)) / 255.0
-		var b = int("0x" + s.substr(4, 2)) / 255.0
-		var a = int("0x" + s.substr(6, 2)) / 255.0
-		return Color(r, g, b, a)
-	return Color(1, 1, 1, 1)
+	return ColorUtils.hex_to_color(h)

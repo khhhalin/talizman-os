@@ -1,9 +1,34 @@
 {
-  "forest": "#FFD700",
-  "jungle": "#CCCCCC",
-  "volcano": "#FF5C5C",
-  "cittadel": "#66CC66",
-  "desert": "#66B2FF",
-    "ruins": "#CC66FF",
-    "rocks": "#A9A9A9"
+  "_comment": "Talisman board game tile colors - Square layout",
+  
+  "fields": "#90EE90",
+  "hills": "#D2B48C",
+  "woods": "#228B22",
+  "plains": "#F0E68C",
+  "city": "#FFD700",
+  "tavern": "#8B4513",
+  "forest": "#006400",
+  "ruins": "#696969",
+  "graveyard": "#2F4F4F",
+  "chapel": "#E6E6FA",
+  "village": "#DEB887",
+  "blacksmith": "#708090",
+  "bridge": "#8B7355",
+  "gate": "#A0522D",
+  "valley": "#9ACD32",
+  "mountain": "#778899",
+  
+  "crags": "#A9A9A9",
+  "peaks": "#708090",
+  "chasm": "#2F2F2F",
+  "temple": "#FFE4B5",
+  "ruins2": "#696969",
+  "castle": "#B22222",
+  "tower": "#4169E1",
+  "cave": "#483D8B",
+  
+  "crown_of_command": "#FFD700",
+  
+  "rest": "#AAAAAA",
+  "start": "#00FF00"
 }

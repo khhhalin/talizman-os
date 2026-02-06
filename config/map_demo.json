@@ -1,10 +1,262 @@
 {
-    "Outer": {
-      "two way": [ ["forest","jungle","ruins","rocks"] ],
-      "one way": [ { "rocks:" : "cittadel" }, { "cittadel": "forest" } ]
+  "nodes": [
+    {
+      "id": "fields",
+      "tile": "fields",
+      "x": 0,
+      "y": 0
     },
-    "Middle": {
-      "two way": [["desert","volcano","cittadel"]],
-      "one way": [ { "volcano": "ruins" }, { "ruins": "jungle" } ]
+    {
+      "id": "hills",
+      "tile": "hills",
+      "x": 150,
+      "y": 0
+    },
+    {
+      "id": "woods",
+      "tile": "woods",
+      "x": 300,
+      "y": 0
+    },
+    {
+      "id": "plains",
+      "tile": "plains",
+      "x": 450,
+      "y": 0
+    },
+    {
+      "id": "city",
+      "tile": "city",
+      "x": 600,
+      "y": 0
+    },
+    {
+      "id": "tavern",
+      "tile": "tavern",
+      "x": 600,
+      "y": 150
+    },
+    {
+      "id": "forest",
+      "tile": "forest",
+      "x": 600,
+      "y": 300
+    },
+    {
+      "id": "ruins",
+      "tile": "ruins",
+      "x": 600,
+      "y": 450
+    },
+    {
+      "id": "graveyard",
+      "tile": "graveyard",
+      "x": 600,
+      "y": 600
+    },
+    {
+      "id": "chapel",
+      "tile": "chapel",
+      "x": 450,
+      "y": 600
+    },
+    {
+      "id": "village",
+      "tile": "village",
+      "x": 300,
+      "y": 600
+    },
+    {
+      "id": "blacksmith",
+      "tile": "blacksmith",
+      "x": 150,
+      "y": 600
+    },
+    {
+      "id": "bridge",
+      "tile": "bridge",
+      "x": 0,
+      "y": 600
+    },
+    {
+      "id": "gate",
+      "tile": "gate",
+      "x": 0,
+      "y": 450
+    },
+    {
+      "id": "valley",
+      "tile": "valley",
+      "x": 0,
+      "y": 300
+    },
+    {
+      "id": "mountain",
+      "tile": "mountain",
+      "x": 0,
+      "y": 150
+    },
+    {
+      "id": "crags",
+      "tile": "crags",
+      "x": 150,
+      "y": 150
+    },
+    {
+      "id": "peaks",
+      "tile": "peaks",
+      "x": 300,
+      "y": 150
+    },
+    {
+      "id": "chasm",
+      "tile": "chasm",
+      "x": 450,
+      "y": 150
+    },
+    {
+      "id": "temple",
+      "tile": "temple",
+      "x": 450,
+      "y": 300
+    },
+    {
+      "id": "ruins2",
+      "tile": "ruins2",
+      "x": 450,
+      "y": 450
+    },
+    {
+      "id": "castle",
+      "tile": "castle",
+      "x": 300,
+      "y": 450
+    },
+    {
+      "id": "tower",
+      "tile": "tower",
+      "x": 150,
+      "y": 450
+    },
+    {
+      "id": "cave",
+      "tile": "cave",
+      "x": 150,
+      "y": 300
+    },
+    {
+      "id": "crown",
+      "tile": "crown_of_command",
+      "x": 300,
+      "y": 300
     }
-  }
+  ],
+  "edges": [
+    {
+      "from": "fields",
+      "to": "hills"
+    },
+    {
+      "from": "hills",
+      "to": "woods"
+    },
+    {
+      "from": "woods",
+      "to": "plains"
+    },
+    {
+      "from": "plains",
+      "to": "city"
+    },
+    {
+      "from": "city",
+      "to": "tavern"
+    },
+    {
+      "from": "tavern",
+      "to": "forest"
+    },
+    {
+      "from": "forest",
+      "to": "ruins"
+    },
+    {
+      "from": "ruins",
+      "to": "graveyard"
+    },
+    {
+      "from": "graveyard",
+      "to": "chapel"
+    },
+    {
+      "from": "chapel",
+      "to": "village"
+    },
+    {
+      "from": "village",
+      "to": "blacksmith"
+    },
+    {
+      "from": "blacksmith",
+      "to": "bridge"
+    },
+    {
+      "from": "bridge",
+      "to": "gate"
+    },
+    {
+      "from": "gate",
+      "to": "valley"
+    },
+    {
+      "from": "valley",
+      "to": "mountain"
+    },
+    {
+      "from": "mountain",
+      "to": "fields"
+    },
+    {
+      "from": "crags",
+      "to": "peaks"
+    },
+    {
+      "from": "peaks",
+      "to": "chasm"
+    },
+    {
+      "from": "chasm",
+      "to": "temple"
+    },
+    {
+      "from": "temple",
+      "to": "ruins2"
+    },
+    {
+      "from": "ruins2",
+      "to": "castle"
+    },
+    {
+      "from": "castle",
+      "to": "tower"
+    },
+    {
+      "from": "tower",
+      "to": "cave"
+    },
+    {
+      "from": "cave",
+      "to": "crags"
+    },
+    {
+      "from": "city",
+      "to": "crags",
+      "directed": true
+    },
+    {
+      "from": "castle",
+      "to": "crown",
+      "directed": true
+    }
+  ]
+}

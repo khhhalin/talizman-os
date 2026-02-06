@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cc76ulo36qjo8"]
+[gd_scene load_steps=2 format=3 uid="uid://cc76ulo36qjo8"]
+
+[ext_resource type="Script" path="res://game/options_menu/options_menu.gd" id="1_script"]
 
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_script")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -21,8 +24,6 @@ offset_right = 138.5
 offset_bottom = 83.5
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 2
-size_flags_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -44,11 +45,8 @@ text = "Keybinds"
 
 [node name="Options" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 2
 text = "Audio"
 
 [node name="Exit" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
-text = "Exit
-"
+text = "Back to Menu"

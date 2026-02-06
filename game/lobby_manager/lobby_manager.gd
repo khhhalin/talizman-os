@@ -90,3 +90,17 @@ func _on_start_pressed():
 
 func _on_find_public_ip_pressed():
 	OS.shell_open("https://icanhazip.com/")
+
+
+func _on_back_pressed():
+	# Return to main menu
+	SceneManager.go_to_main_menu()
+
+
+func _on_single_player_pressed():
+	# Go to character selection for single player
+	var char_select = await SceneManager.go_to_character_select()
+	if char_select == OK:
+		var scene = get_tree().current_scene
+		if scene and scene.has_method("setup_single_player"):
+			scene.setup_single_player(1)  # 1 bot for now
